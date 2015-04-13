@@ -8,21 +8,15 @@ energyOfImg = sum(noduleimg(:));
 %% post process the nodules
 % find the length of each nodules in the lung region
 nodules = regionprops(noduleimg, 'Centroid', 'MajorAxisLength', 'MinorAxisLength');
-% consider nodules with max length larger than 3.5 and 
-% min length larger than 1 to be cancerous
+% consider nodules with max length larger than 3.5 and min length  to be cancerous
 cancerous = [];
 maxindex = [nodules.MajorAxisLength] > 3.5;
 minindex = [nodules.MinorAxisLength] > 1;
 index = maxindex .* minindex;
 for i = 1: length(index)
     if index(i) == 1
-        temps = nodules(i);
+        temps = subsetstruct(nodules(i), index(i));
         cancerous = [cancerous; temps];
     end
 end
-
-%% label the cancerous nodules in the image
-centers = cancerous.Centroid;
-diameters = mean([cancerous.MajorAxisLength cancerous.MinorAxisLength], 2);
-radii = diameters/2;
-
+        
