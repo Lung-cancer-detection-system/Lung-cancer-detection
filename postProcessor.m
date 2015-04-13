@@ -11,7 +11,7 @@ nodules = regionprops(noduleimg, 'Centroid', 'MajorAxisLength', 'MinorAxisLength
 % consider nodules with max length larger than 3.5 and 
 % min length larger than 1 to be cancerous
 cancerous = [];
-maxindex = [nodules.MajorAxisLength] > 3.5;
+maxindex = [nodules.MajorAxisLength] > 4.5;
 minindex = [nodules.MinorAxisLength] > 1;
 index = maxindex .* minindex;
 for i = 1: length(index)
@@ -22,7 +22,16 @@ for i = 1: length(index)
 end
 
 %% label the cancerous nodules in the image
-centers = cancerous.Centroid;
-diameters = mean([cancerous.MajorAxisLength cancerous.MinorAxisLength], 2);
-radii = diameters/2;
+imshow(greyimg, []);
+% imshow(noduleimg);
+hold on;
+for i = 1: length(cancerous)
+    centers = cancerous(i).Centroid;
+    diameters = mean([cancerous(i).MajorAxisLength cancerous(i).MinorAxisLength], 2);
+    radii = diameters/2;
+    viscircles(centers,radii);
+end
+hold off;
+
+end
 
