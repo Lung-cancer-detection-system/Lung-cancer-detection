@@ -1,7 +1,7 @@
 function greyimg = preProcessor()
 
 %% read the image file and preprocess
-path = 'resources/000008.dcm';
+path = 'resources/000032.dcm';
 
 % read the dcm image file
 img = dicomread(path);
