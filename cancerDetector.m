@@ -72,6 +72,7 @@ end
 % get the nodules by invert the tranformed image
 imgdilate = ~imgdilate;
 % consider whether erode image is necessary
+% it is not necessary
 % SE = strel('disk', 1);
 % imgdilate = imerode(imgdilate, SE);
 
