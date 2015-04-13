@@ -1,6 +1,7 @@
 function greyimg = preProcessor()
 
 %% read the image file and preprocess
+% 032 is healthy
 path = 'resources/000032.dcm';
 
 % read the dcm image file
